@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Table(name="users")
 @NoArgsConstructor
@@ -22,5 +24,8 @@ public class User {
 
     @Column(unique = true, nullable = false)
     private String email;
+
+    @OneToMany(mappedBy = "user",fetch=FetchType.LAZY)
+    private List<Order> orders;
 
 }
