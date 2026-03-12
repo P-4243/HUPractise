@@ -1,0 +1,14 @@
+<h2>User List</h2>
+<input type="text" placeholder="search user..." [formControl]="searchControl"/><!-- That means property binding....We are binding the HTML input to the FormControl object. -->
+<ul>
+    <!-- <li *ngFor="let user of users">This is Angular's loop.for(User user : users) Each iteration creates a new DOM element.-->
+    <li *ngFor="let user of users$|async" (click)="rowClicked(user)"> <!-- We are using the async pipe to subscribe to the users$ Observable and get the latest value. The async pipe also handles unsubscribing automatically when the component is destroyed. -->    
+        {{user.name}} - {{user.email}}
+    <button (click)="buttonClicked(user,$event)">Bubling prevent</button> <!-- $event is a special variable that holds the event object. We can use it to stop the click event from propagating to the row when we click the button. -->
+    </li>
+</ul>
+<button (click)="throttleTest()">Throttle test(click Fast)</button>
+<!-- But here:*ngFor is a structural directive
+It repeats the <li> element for each user
+Remember earlier why we imported CommonModule?
+Because *ngFor lives inside CommonModule. -->
